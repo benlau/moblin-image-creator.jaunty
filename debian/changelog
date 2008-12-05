@@ -30,8 +30,9 @@ moblin-image-creator (0.48) gaston; urgency=low
   * Fixing a bug about http://bugzilla.moblin.org/show_bug.cgi?id=189. Thanks to Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>
   * Fixing a bug about http://bugzilla.moblin.org/show_bug.cgi?id=194. Thanks to Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>
   * Supporting Spanish made by Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
+  * Updating Spanish localization made by Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Fri, 05 Dec 2008 12:30:52 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Fri, 05 Dec 2008 12:34:48 +0900
 
 moblin-image-creator (0.47) gaston; urgency=low
 
