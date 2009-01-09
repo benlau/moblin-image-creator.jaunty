@@ -655,13 +655,18 @@ class BaseUsbImage(InstallImage):
             out_file.write(out_string)
         out_file.close()
 
-        cmd_line = "mkfs.vfat %s" % self.path
+        #cmd_line = "mkfs.vfat %s" % self.path
+        #Note: The note below for syslinux applies to mkfs as well.
+        #         In Ubuntu8.10 the host version of mkfs.vfat leads sometimes
+        #         to strange results. 
 
-        result = pdk_utils.execCommand(cmd_line, callback = self.progress_callback)
-        if result:
-            print >> sys.stderr, _("Error running command: %s") % cmd_line
-            raise EnvironmentError, _("Error running command: %s") % cmd_line
-
+        #result = pdk_utils.execCommand(cmd_line, callback = self.progress_callback)
+        #if result:
+        #    print >> sys.stderr, _("Error running command: %s") % cmd_line
+        #    raise EnvironmentError, _("Error running command: %s") % cmd_line
+        jail_path = self.path[len(self.project.path):]
+        self.project.chroot('mkfs.vfat %s' % jail_path)
+ 
         # NOTE: Running syslinux on the host development system
         #       means the host and target have compatible architectures.
         #       This runs syslinux inside the jailroot so the correct
