@@ -33,9 +33,10 @@ moblin-image-creator (0.48) gaston; urgency=low
   * Updating Spanish localization made by Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
 
   [ Prajwal Mohan ]
-  * Fixing KVM bug on intrepid 
+  * Fixing KVM bug on intrepid
+  * Removing check-update feature 
 
- -- Prajwal Mohan <prajwal@linux.intel.com>  Fri, 09 Jan 2009 10:27:25 -0800
+ -- Prajwal Mohan <prajwal@linux.intel.com>  Fri, 16 Jan 2009 12:04:12 -0800
 
 moblin-image-creator (0.47) gaston; urgency=low
 

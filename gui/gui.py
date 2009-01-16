@@ -299,17 +299,19 @@ class App(object):
 
         for key in sorted(self.current_project().targets):
             installed_fsets = ' '.join(self.current_project().targets[key].installed_fsets())
-            if self.current_project().platform.config_info['package_manager'] == 'yum':
-                cmdOutput = []
-                retVal = self.current_project().targets[key].chroot("yum check-update", cmdOutput)
-                if retVal == 100:
-                    self.targetList.append((key, installed_fsets, "Updates availalbe for %s packages" % len(cmdOutput)))
-                elif retVal == 0:
-                        self.targetList.append((key, installed_fsets, "None"))
-                else:
-                    self.targetList.append((key, installed_fsets, "Could not retrieve information"))
-            else:
-                    self.targetList.append((key, installed_fsets, "Info Not Available"))
+            #Disabling check update feature for right now
+	    #if self.current_project().platform.config_info['package_manager'] == 'yum':
+            #    cmdOutput = []
+            #    retVal = self.current_project().targets[key].chroot("yum check-update", cmdOutput)
+            #    if retVal == 100:
+            #        self.targetList.append((key, installed_fsets, "Updates availalbe for %s packages" % len(cmdOutput)))
+            #    elif retVal == 0:
+            #            self.targetList.append((key, installed_fsets, "None"))
+            #    else:
+            #        self.targetList.append((key, installed_fsets, "Could not retrieve information"))
+            #else:
+            #        self.targetList.append((key, installed_fsets, "Info Not Available"))
+            self.targetList.append((key, installed_fsets, "Info Not Available"))
         if self.current_project().targets:
             selection = self.targetView.get_selection()
             selection.select_path(0)
