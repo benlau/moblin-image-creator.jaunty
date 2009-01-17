@@ -1,6 +1,6 @@
 Summary: Mobline Image Creator -- Mobile & Internet Linux Development Kit
 Name: moblin-image-creator
-Version: 0.48
+Version: 0.49
 Release: 1%{?dist}
 License: GPL
 Group: Development
@@ -63,6 +63,7 @@ rm -rf %{buildroot}
 %changelog
 * Sat Jan 17 2009 Mitsutaka Amano <mamano@miraclelinux.com> [0.49]
 - Starting new version
+- Up to version of rpm spec file
 
 * Fri Jan 16 2009 Prajwal Mohan <prajwal@linux.intel.com>
 - Removing check-update feature

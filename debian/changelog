@@ -1,8 +1,9 @@
 moblin-image-creator (0.49) gaston; urgency=low
 
   * Starting new version
+  * Up to version of rpm spec file
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Sat, 17 Jan 2009 17:04:26 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Sat, 17 Jan 2009 17:20:29 +0900
 
 moblin-image-creator (0.48) gaston; urgency=low
 
