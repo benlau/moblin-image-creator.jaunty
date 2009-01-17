@@ -61,6 +61,15 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Sat Jan 17 2009 Mitsutaka Amano <mamano@miraclelinux.com> [0.49]
+- Starting new version
+
+* Fri Jan 16 2009 Prajwal Mohan <prajwal@linux.intel.com>
+- Removing check-update feature
+
+* Fri Jan 09 2009 Prajwal Mohan <prajwal@linux.intel.com>
+- Fixing KVM bug on intrepid
+
 * Fri Dec 05 2008 Mitsutaka Amano <mamano@miraclelinux.com>
 - Supporting Spanish made by Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.co
 m>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
