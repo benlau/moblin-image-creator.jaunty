@@ -40,6 +40,7 @@ class YumPackageManager(moblin_pkgbase.PackageManager):
     def installGroups(self, chroot_dir, groups_list, callback = None):
         """Install the list of groups in the chroot environement"""
         self.__yumPreRun(chroot_dir)
+        pdk_utils.setResolvConfFromHost(chroot_dir)
         if not groups_list:
             # No groups, so nothing to do
             return
@@ -84,6 +85,7 @@ class YumPackageManager(moblin_pkgbase.PackageManager):
     def installPackages(self, chroot_dir, package_list, callback = None):
         """Install the list of packages in the chroot environement"""
         self.__yumPreRun(chroot_dir)
+        pdk_utils.setResolvConfFromHost(chroot_dir)
         if not package_list:
             # No packages, so nothing to do
             return
@@ -123,6 +125,7 @@ class YumPackageManager(moblin_pkgbase.PackageManager):
 
     def updateChroot(self, chroot_dir, callback = None):
         """Update the chroot environment to have the latest packages"""
+        pdk_utils.setResolvConfFromHost(chroot_dir)
         command = "yum clean metadata"
         print _("Running 'yum update' command: %s") % (command)
         print _("\t in the chroot: %s") % (chroot_dir)
@@ -147,6 +150,7 @@ class YumPackageManager(moblin_pkgbase.PackageManager):
 
         """ due to unknown reason execChrootCommand doesn't work on wide-match symbol"""
         #FIXME
+        pdk_utils.setResolvConfFromHost(chroot_dir)
         command = "/usr/sbin/chroot %s rm -fr /var/lib/rpm/*db*" % (chroot_dir)
         print _("Running command: %s") % (command)
         os.system(command)

@@ -56,7 +56,7 @@ class Busybox(object):
                 os.symlink("busybox", cmd)
         os.chdir(save_cwd)
 
-def create(project, initrd_file, fs_type='RAMFS'):
+def create(project, initrd_file, additional_files, target_path, fs_type='RAMFS'):
     """Function to create an initrd file"""
     initrd_file = os.path.abspath(os.path.expanduser(initrd_file))
 
@@ -86,6 +86,16 @@ def create(project, initrd_file, fs_type='RAMFS'):
     names = os.listdir(os.path.join(project.platform.path, 'initramfs'))
     for name in names:
         shutil.copy(os.path.join(project.platform.path, 'initramfs', name), scratch_path)
+    #Copy additional files - firmware, scripts etc
+    if additional_files:
+        for file_path in additional_files:
+            file_path = file_path.rstrip()
+            if os.path.exists(os.path.join(target_path, file_path)):
+                folder_path = (os.path.join(scratch_path, file_path)).rsplit('/', 1)[0]
+                if not os.path.exists(folder_path):
+                    os.makedirs(folder_path)
+                #print "Copying: %s to %s" % (os.path.join(target_path, file_path), os.path.join(scratch_path, file_path))
+                shutil.copyfile(os.path.join(target_path, file_path), os.path.join(scratch_path, file_path))
     # Create the initrd image file
     os.chdir(scratch_path)
 

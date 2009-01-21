@@ -443,6 +443,17 @@ def safeTextFileCopy(source_file, destination_file, force = False):
         in_file.close()
         out_file.close()
 
+def setResolvConfFromHost(chroot_path):
+    for filename in ('etc/resolv.conf'),:
+        source_file = os.path.join(os.sep, filename)
+        target_file = os.path.join(chroot_path, filename)
+        safeTextFileCopy(source_file, target_file, True)
+
+def deleteResolvConf(chroot_path):
+    if os.path.exists(os.path.join(chroot_path, 'etc/resolv.conf')):
+        os.unlink(os.path.join(chroot_path, 'etc/resolv.conf'))
+
+
 def mountList(mount_list, chroot_dir):
     """Mount the items specified in the mount list.  Return back a list of what
     got mounted"""

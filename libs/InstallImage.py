@@ -24,6 +24,7 @@ import sys
 import tempfile
 import traceback
 import paths
+import string
 
 import Project
 import SDK
@@ -268,6 +269,7 @@ class InstallImage(object):
         use squashfs on the device then the content will be copied out of the
         squashfs image during the install"""
         print _("Creating root file system...")
+        pdk_utils.deleteResolvConf(self.target.fs_path)
         self.target.execute_post_install_scripts()
 
         # re-create fstab every time, since user could change fstab options on
@@ -284,15 +286,45 @@ class InstallImage(object):
         self.rootfs_path = os.path.join(self.target.image_path, self.rootfs)
         if os.path.isfile(self.rootfs_path):
             os.remove(self.rootfs_path)
-        
-        fs_path      = self.target.fs_path[len(self.project.path):]
-        image_path   = self.target.image_path[len(self.project.path):]
-        image_path   = os.path.join(image_path,'rootfs.img')
-        cmd          = "mksquashfs %s %s -no-progress -ef %s" % (fs_path, image_path, self.exclude_file)
+      
         self.write_manifest(self.path)
         self.target.umount()
-        print _("Executing the mksquashfs program: %s") % cmd
-        self.project.chroot(cmd)
+
+        fs_path      = self.target.fs_path[len(self.project.path):]
+        cmd = "du -ks %s" % fs_path
+        print _("Caclulating FS size: %s") % cmd
+        cmdOutput = []
+        self.project.chroot(cmd, cmdOutput)
+        out_string = chr(0) * 1024
+        out_file = open(self.rootfs_path, 'w')
+        # Write the string out to the file to create file of size * kibyte in length
+        size = int(string.atoi(cmdOutput[0].split()[0]) * 1.1) + 40960
+        print "Rootfs size: %s" % size
+        for count in range(0, size):
+            if self.progress_callback and count % 1024 == 0:
+                self.progress_callback(None)
+            out_file.write(out_string)
+        out_file.close()       
+
+        image_path   = self.target.image_path[len(self.project.path):] 
+        image_path   = os.path.join(image_path,'rootfs.img')        
+        cmd = 'mkfs.ext3 -F %s' % image_path
+        self.project.chroot(cmd)        
+
+        temp_dir   = os.path.join(self.target.image_path,'temp')        
+        if not os.path.exists(temp_dir):
+            os.makedirs(temp_dir)
+
+        print _("Mounting rootfs.img ...")
+        cmd = "mount -o loop %s %s" % (self.rootfs_path, temp_dir)
+        pdk_utils.execCommand(cmd)        
+        print _("Copying files...")
+        cmd = "cp -a %s/. %s" % (self.target.fs_path, temp_dir)
+        pdk_utils.execCommand(cmd)        
+        print _("Unmounting...")
+        cmd = "umount %s" % (temp_dir)
+        pdk_utils.execCommand(cmd)        
+
         self.target.mount()
             
     def delete_rootfs(self):
@@ -323,12 +355,41 @@ class InstallImage(object):
         self.kernels.pop(0)
         if not os.path.exists("%s/boot/boot" % self.target.path):
             os.symlink(".", "%s/boot/boot" % self.target.path)
+
         fs_path    = self.target.fs_path[len(self.project.path):]
         fs_path    = os.path.join(fs_path, 'boot')
+
+        cmd = "du -ks %s" % fs_path
+        cmdOutput = []
+        print _("Caclulating Boot FS size: %s") % cmd
+        self.project.chroot(cmd, cmdOutput)
+        out_string = chr(0) * 1024
+        out_file = open(self.bootfs_path, 'w')
+        size = int(string.atoi(cmdOutput[0].split()[0]) * 1.1) + 10240
+        print _("Bootfs size: %s") % (size)
+        for count in range(0, size):
+            if self.progress_callback and count % 1024 == 0:
+                self.progress_callback(None)
+            out_file.write(out_string)
+        out_file.close()
         image_path = self.target.image_path[len(self.project.path):]
-        image_path = os.path.join(image_path,'bootfs.img')
-        cmd        = "mksquashfs %s %s -no-progress" % (fs_path, image_path)
+        image_path = os.path.join(image_path, 'bootfs.img')
+        cmd = 'mkfs.ext3 -F %s' % image_path
         self.project.chroot(cmd)
+
+        temp_dir   = os.path.join(self.target.image_path,'temp')        
+        if not os.path.exists(temp_dir):
+            os.makedirs(temp_dir)
+
+        print _("Mounting bootfs.img...")
+        cmd = "mount -o loop %s %s" % (self.bootfs_path, temp_dir)
+        pdk_utils.execCommand(cmd)
+        print _("Copying boot files...")
+        cmd = "cp -a %s/. %s" % (os.path.join(self.target.fs_path, 'boot'), temp_dir)
+        pdk_utils.execCommand(cmd)
+        print _("Unmounting...")
+        cmd = "umount %s" % (temp_dir)
+        pdk_utils.execCommand(cmd)
 
     def delete_bootfs(self):
         if self.bootfs and os.path.isfile(self.bootfs_path):
@@ -385,11 +446,16 @@ class InstallImage(object):
             self.create_initramfs("/tmp/.tmp.initrd%d" % count, kernel_version)
         self.kernels.pop(0)
 
-    def create_all_initrd(self):
+    def create_all_initrd(self, additional_files=None, target_path=None):
         cfg_filename = os.path.join(self.project.path, "etc/moblin-initramfs.cfg")
         self.writeShellConfigFile(cfg_filename)
-        initrd_path = "/tmp/.tmp.initrd0"
-        Mkinitrd.create(self.project, initrd_path)
+        self.kernels.insert(0, self.default_kernel)
+        for count, kernel in enumerate(self.kernels):
+            kernel_version = kernel.split('vmlinuz-').pop().strip()
+            initrd_path = "/tmp/.tmp.initrd%s" % count
+            Mkinitrd.create(self.project, initrd_path, additional_files, target_path)
+            shutil.copy(initrd_path, os.path.join(self.target.fs_path, "boot/initrd%s.img-%s" % (count, kernel_version)))
+        self.kernels.pop(0)
 
     def create_initramfs(self, initrd_file, kernel_version):
         print _("Creating initramfs for kernel version: %s") % kernel_version
@@ -474,7 +540,11 @@ class LiveIsoImage(InstallImage):
     def create_image(self, fs_type='RAMFS'):
         print _("LiveCDImage: Creating Live CD Image(%s) Now...") % fs_type
         image_type = _("Live CD Image (no persistent R/W)")
-        self.create_all_initramfs()
+        if self.project.platform.config_info['package_manager'] == 'apt':
+            self.create_all_initramfs()
+        if self.project.platform.config_info['package_manager'] == 'yum':
+            self.create_all_initrd()
+
         self.create_rootfs()
         initrd_stat_result = os.stat('/tmp/.tmp.initrd0')
         rootfs_stat_result = os.stat(self.rootfs_path)
@@ -871,13 +941,16 @@ class NANDImage(InstallImage):
                raise ValueError(_("NANDImage: This platform could not support NAND image!"))
         print _("NANDImage: Creating NAND Image...")
 
+        additional_files = self.get_firmware_list()
+
         if self.project.platform.config_info['package_manager'] == 'apt':
             self.create_all_initramfs()
         if self.project.platform.config_info['package_manager'] == 'yum':
-            self.create_all_initrd()
-
+            self.create_all_initrd(additional_files, self.target.fs_path)
+        self.create_fstab(False)
         self.target.umount()
         initrd_path = "/tmp/.tmp.initrd0"
+
         os.system(os.path.join(self.project.platform.path, "nand.sh %s %s %s %s %s %s %s %s" 
               % (os.path.join(self.target.config_path, 'nand_kernel_cmdline'),
                  os.path.join(self.target.fs_path, 'boot/bootstub'),
@@ -887,6 +960,17 @@ class NANDImage(InstallImage):
                  int(self.project.get_target_config(self.target.name, 'nand_image_size')),
                  self.path+'.boot',
                  self.path)))
+
+    def get_firmware_list(self):
+        #Will be populated once firmware is available
+        if os.path.exists(os.path.join(self.project.platform.path, "firmware")):
+            print _("Firmware file found")
+            firmware_file = open(os.path.join(self.project.platform.path, "firmware"))            
+            firmware_list = firmware_file.readlines()            
+            firmware_file.close()
+            return firmware_list            
+        else:
+            return None
 
     def __str__(self):
         return ("<NANDImage: project=$s, target=%s, name=%s>"

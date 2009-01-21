@@ -881,6 +881,7 @@ class App(object):
         print >> prompt_file, "T: %s" % target.name
         prompt_file.close()
         print _("Target path: %s") % target_path
+        pdk_utils.setResolvConfFromHost(target_path)
         cmd = '/usr/bin/gnome-terminal -x /usr/sbin/chroot %s env -u SHELL HOME=/root su -p - &' % (target_path)
         print cmd
         if os.system(cmd) != 0:

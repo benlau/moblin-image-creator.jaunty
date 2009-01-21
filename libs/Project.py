@@ -70,13 +70,19 @@ class FileSystem(object):
         return self.platform.pkg_manager.updateChroot(self.chroot_path,
             callback = self.progress_callback)
 
+    def createMtab(self):
+        f = open("%s/etc/mtab" % self.path, 'w')
+        f.close()
+
+
     def setHostname(self, hostname):
         self.mount()
+        pdk_utils.setResolvConfFromHost(self.path)
         # Setup copies of some useful files from the host into the chroot
-        for filename in ('etc/resolv.conf'),:
-            source_file = os.path.join(os.sep, filename)
-            target_file = os.path.join(self.chroot_path, filename)
-            pdk_utils.safeTextFileCopy(source_file, target_file)
+        #for filename in ('etc/resolv.conf'),:
+        #    source_file = os.path.join(os.sep, filename)
+        #    target_file = os.path.join(self.chroot_path, filename)
+        #    pdk_utils.safeTextFileCopy(source_file, target_file)
         f = open("%s/etc/hostname" % self.path, 'w')
         f.write("%s\n" % hostname)
         f.close()
@@ -208,6 +214,7 @@ class Project(FileSystem):
         if self.platform.config_info['package_manager'] == 'yum':
             self.mount()
             self.platform.pkg_manager.resetPackageDB(self.chroot_path, None)
+        self.createMtab()
         return super(Project, self).installPackages(self.platform.buildroot_packages + self.platform.buildroot_extras)
 
     def umount(self, directory_set = None):

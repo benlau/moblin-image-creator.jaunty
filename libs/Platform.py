@@ -235,6 +235,7 @@ class Platform(object):
         print _("Exec command: %s") % cmd
         result = pdk_utils.execCommand(cmd, output = output, callback = callback)
         if result != 0:
+            self.__yumDoUmounts(chroot_dir)
             raise RuntimeError(_("Failed to create Yum based rootstrap"))
         # nuke all the yum cache to ensure that we get the latest greatest at project creation
         shutil.rmtree(os.path.join(chroot_dir, 'var', 'cache', 'yum'))
