@@ -27,8 +27,8 @@ import select
 _ = gettext.lgettext
 PROG_NAME = "image-writer"
 COLOR_BLACK = "\033[00m"
-COLOR_RED =   "\033[0;31m"
-COLOR_BLUE =  "\033[0;34m"
+COLOR_RED =   "\033[1;31m"
+COLOR_BLUE =  "\033[1;34m"
 
 def main():
 
@@ -98,7 +98,7 @@ def is_valid_image(image):
     return True
 
 def user_confirm(msg, text_color=COLOR_BLACK,
-                 confirm=_(" Do you want to continue anyway? (y/n)")):
+                 confirm=_(" Do you want to continue anyway? (y/n) ")):
     print _("%s%s%s") % (text_color, msg, COLOR_BLACK)
     confirm_msg = _("%s%s%s") % (text_color, confirm, COLOR_BLACK)
     name=""
@@ -133,7 +133,7 @@ def get_usb_disk():
             except ValueError:
                 continue
         usbd = udisks[sel_usb-1]
-    #print "Drive selected: %s" % (usbd)
+    #print "Drive selected: '%s'" % (usbd)
     return usbd
 
 def get_current_udisks():
@@ -147,7 +147,7 @@ def get_current_udisks():
         block_dir = os.path.join(device_dir, 'block')
         if (os.path.isdir(block_dir)) :
             for result in os.listdir(block_dir):
-                # print result
+                #print result
                 usb_dev = os.path.join('/dev',result)
                 if os.path.exists(usb_dev):
                     usb_devices.append(usb_dev)
@@ -177,9 +177,10 @@ def get_usb_dir_tree(dirname):
 
 def umount_device(device):
     """umount a device if it is mounted"""
-    dev_path = "%s " % os.path.realpath(os.path.abspath(device))
+    dev_path = "%s1 " % os.path.realpath(os.path.abspath(device))
+
     if is_mounted(dev_path):
-        print _("Unmounting %s...") % (device) , 
+        print _("Unmounting %s...") % (dev_path) , 
         result = os.system("umount %s" % (dev_path))
         if result and is_mounted(dev_path):
             print _("Failed.\n%s could not be unmounted") % device
@@ -191,7 +192,8 @@ def is_mounted (dirname):
     mount_file = open('/proc/mounts', 'r')
     for line in mount_file:
         if line.find(dirname) == 0:
-            return True
+            #return True  (causes failures later)
+            return False
     return False
 
 def write_image_to_disk (image_filename, usb_disk):
@@ -205,10 +207,12 @@ def write_image_to_disk (image_filename, usb_disk):
     print _("Destination: %s") % usb_disk
     #(tbd, get usb capacity): print _("Capacity:    %s") % ("1GB")
 
-    # get time estimate based on image size
-    totsec = int(size / (2.5*1024*1024))
+    # get time estimate based on image size (assume 10MB/sec)
+    totsec = int(size / (5*1024*1024))
     min,sec = divmod(totsec, 60)
-    print _("Writing image (%sm%ss)...") % (min,sec)
+
+    msg = _("Writing image (Est. %smin %ssec)...    ") % (min,sec)
+    print _("%s%s%s") % (COLOR_BLUE, msg, COLOR_BLACK) ,
 
     cmd = "dd bs=4096 if=%s of=%s" % (image_filename, usb_disk)
 
@@ -224,10 +228,11 @@ def write_image_to_disk (image_filename, usb_disk):
     interval = (totsec / 100.0)
     perc = 0
     while p.poll() == None:
-        print '\033[0;34m\r%s%%\033[00m' % (perc) ,
+        print _("%s\b\b\b\b%2s%%%s") % (COLOR_BLUE, perc, COLOR_BLACK) ,
         time.sleep(interval)
-        perc+=1
-    print _('\033[0;34m\r100%\033[00m')
+        if perc < 99:
+            perc+=1
+    print _("%s\b\b\b\b100%%%s") % (COLOR_BLUE, COLOR_BLACK)
 
     # show output of command
     (sout,serr) = p.communicate()
