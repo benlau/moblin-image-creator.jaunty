@@ -61,6 +61,13 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Wed Feb 11 2009 Mitsutaka Amano <mamano@miraclelinux.com>
+- Reverted commit a0a42494e405182a84da8df52e096baf23dbab1b.
+- Added device files in install.sh.
+
+* Mon Feb 09 2008 Bob Spencer <bob.spencer@intel.com>
+- Updated image-writer script. Better output.
+
 * Sat Jan 17 2009 Mitsutaka Amano <mamano@miraclelinux.com> [0.49]
 - Starting new version
 - Up to version of rpm spec file

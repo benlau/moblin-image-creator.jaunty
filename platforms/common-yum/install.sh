@@ -63,7 +63,7 @@ pre_scsi_disk_number=$( ls /sys/class/scsi_disk | wc -l)
 found=no
 # Find the install disk
 while true; do
-      for device in 'hda' 'hdb' 'sda' 'sdb'
+      for device in 'hda' 'hdb' 'sda' 'sdb' 'sdc' 'sdd'
       do
         echo "checking device: /dev/${device} for installation target"
         if [ -e /sys/block/${device}/removable ]; then
