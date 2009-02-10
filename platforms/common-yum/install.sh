@@ -62,10 +62,9 @@ splash_display 'INSTALL..........'
 pre_scsi_disk_number=$( ls /sys/class/scsi_disk | wc -l)
 found=no
 # Find the install disk
-while true
-do
-    for try in '1' '2' '3'; do
-      for device in 'hda' 'hdb' 'sda' 'sdb' 'sdc' 'sdd'; do
+while true; do
+      for device in 'hda' 'hdb' 'sda' 'sdb'
+      do
         echo "checking device: /dev/${device} for installation target"
         if [ -e /sys/block/${device}/removable ]; then
            if [ "$(cat /sys/block/${device}/removable)" = "0" ]; then
@@ -85,26 +84,6 @@ do
       fi
       /bin/sleep 5
       echo "Did not find an installation target device"
-    done
-    echo "Trying non-removable drives"
-    /bin/sleep 5
-    for device in 'hda' 'hdb' 'sda' 'sdb' 'sdc' 'sdd'; do
-       echo "checking device /dev/${device} for installation source..."
-       mount /dev/${device}  /mnt
-       if [ -f /mnt/rootfs.img ] ; then
-          echo "Found Boot drive at /dev/${device}"	        
-          found="yes"
-       fi
-       umount /dev/${device}
-       if [ "$found" = "yes" ]; then
-          break;
-       fi	      
-       echo "/dev/${device} does not contain a rootfs"
-    done
-    if [ "$found" = "yes" ]; then
-       break;
-    fi
-
 done
 echo "will install to /dev/${device}"
 
