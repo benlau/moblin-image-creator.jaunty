@@ -566,13 +566,14 @@ class LiveIsoImage(InstallImage):
         except OSError:
             print _("Could not copy rootfs_path. Ignored error")
         try:
-            pdk_utils.copy(os.path.join(self.project.path, "/usr/lib/syslinux/isolinux.bin"), self.tmp_path)
+            pdk_utils.copy(os.path.join(self.project.path, "usr/lib/syslinux/isolinux.bin"), self.tmp_path)
         except OSError:
             print _("Could not copy isolinux.bin. Ignored error")
 
         print _("Creating CD image file at: %s") % self.path
-        cmd_line = "genisoimage -quiet -o %s -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -l -R -r %s" % (self.path, self.tmp_path)
-        result = pdk_utils.execCommand(cmd_line, callback = self.progress_callback)
+        jail_path = self.path[len(self.project.path):]
+        cmd_line = "genisoimage -quiet -o %s -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -l -R -r %s" % (jail_path, self.tmp_path)
+        result = self.project.chroot(cmd_line)
         if result:
             print >> sys.stderr, _("Error running command: %s") % cmd_line
             raise EnvironmentError, _("Error running command: %s") % cmd_line
@@ -610,13 +611,14 @@ class NFSLiveIsoImage(InstallImage):
         # Flashing yellow on a green background
         self.install_kernels("ae", image_type, 'NFSCDImage')
         try:
-            pdk_utils.copy(os.path.join(self.project.path, "/usr/lib/syslinux/isolinux.bin"), self.tmp_path)
+            pdk_utils.copy(os.path.join(self.project.path, "usr/lib/syslinux/isolinux.bin"), self.tmp_path)
         except OSError:
             print _("Could not copy isolinux.bin. Ignored error")
 
         print _("Creating NFS CD image file at: %s") % self.path
-        cmd_line = "genisoimage -quiet -o %s -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -l -R -r %s" % (self.path, self.tmp_path)
-        result = pdk_utils.execCommand(cmd_line, callback = self.progress_callback)
+        jail_path = self.path[len(self.project.path):]
+        cmd_line = "genisoimage -quiet -o %s -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -l -R -r %s" % (jail_path, self.tmp_path)
+        result = self.project.chroot(cmd_line)
         if result:
             print >> sys.stderr, _("Error running command: %s") % cmd_line
             raise EnvironmentError, _("Error running command: %s") % cmd_line
@@ -673,13 +675,14 @@ class InstallIsoImage(InstallImage):
         except OSError:
             print _("Could not create install script. Ignored error")
         try:
-            pdk_utils.copy(os.path.join(self.project.path, "/usr/lib/syslinux/isolinux.bin"), self.tmp_path)
+            pdk_utils.copy(os.path.join(self.project.path, "usr/lib/syslinux/isolinux.bin"), self.tmp_path)
         except OSError:
             print _("Could not copy isolinux.bin. Ignored error")
 
         print _("Creating CD image file at: %s") % self.path
-        cmd_line = "genisoimage -quiet -o %s -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -l -R -r %s" % (self.path, self.tmp_path)
-        result = pdk_utils.execCommand(cmd_line, callback = self.progress_callback)
+        jail_path = self.path[len(self.project.path):]
+        cmd_line = "genisoimage -quiet -o %s -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -l -R -r %s" % (jail_path, self.tmp_path)
+        result = self.project.chroot(cmd_line)
         if result:
             print >> sys.stderr, _("Error running command: %s") % cmd_line
             raise EnvironmentError, _("Error running command: %s") % cmd_line

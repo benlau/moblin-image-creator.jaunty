@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Mon Mar 02 2009 Mitsutaka Amano <mamano@miraclelinux.com>
+- Using the genisoimage in project environment.
+
 * Wed Feb 11 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Reverted commit a0a42494e405182a84da8df52e096baf23dbab1b.
 - Added device files in install.sh.
