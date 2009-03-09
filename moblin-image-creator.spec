@@ -63,6 +63,7 @@ rm -rf %{buildroot}
 %changelog
 * Tue Mar 10 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Renamed to netbook-lpia-moblin2-prealpha1 from netbook-lpia-moblin2. Fixed Moblin 2.0 Pre-Alpha1 yum repository.
+- Fixed typo changelog date.
 
 * Mon Mar 02 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Using the genisoimage in project environment.
@@ -71,7 +72,7 @@ rm -rf %{buildroot}
 - Reverted commit a0a42494e405182a84da8df52e096baf23dbab1b.
 - Added device files in install.sh.
 
-* Mon Feb 09 2008 Bob Spencer <bob.spencer@intel.com>
+* Mon Feb 09 2009 Bob Spencer <bob.spencer@intel.com>
 - Updated image-writer script. Better output.
 
 * Sat Jan 17 2009 Mitsutaka Amano <mamano@miraclelinux.com> [0.49]

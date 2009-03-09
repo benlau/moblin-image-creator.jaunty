@@ -15,8 +15,9 @@ moblin-image-creator (0.49) gaston; urgency=low
   * Added device files in install.sh.
   * Using the genisoimage in project environment.
   * Renamed to netbook-lpia-moblin2-prealpha1 from netbook-lpia-moblin2. Fixed Moblin 2.0 Pre-Alpha1 yum repository. 
+  * Fixed typo changelog date. 
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Tue, 10 Mar 2009 00:13:01 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Tue, 10 Mar 2009 00:16:45 +0900
 
 moblin-image-creator (0.48) gaston; urgency=low
 
