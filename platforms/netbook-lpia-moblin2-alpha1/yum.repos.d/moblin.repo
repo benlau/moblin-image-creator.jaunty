@@ -1,0 +1,20 @@
+[moblin]
+name=Moblin 2.0 Core Alpha1
+failovermethod=priority
+baseurl=http://repo.moblin.org/moblin/releases/test/alpha1/os
+enabled=1
+gpgcheck=0
+
+[moblin-debuginfo]
+name=Moblin 2.0 Core Alpha1 - Debug
+failovermethod=priority
+baseurl=http://repo.moblin.org/moblin/releases/test/alpha1/debug
+enabled=0
+gpgcheck=0
+
+[moblin-source]
+name=Moblin 2.0 Core Alpha1 - Source
+failovermethod=priority
+baseurl=http://repo.moblin.org/moblin/releases/test/alpha1/source
+enabled=0
+gpgcheck=0

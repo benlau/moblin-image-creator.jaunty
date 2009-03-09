@@ -1,6 +1,6 @@
-[Moblin]
+[moblin]
 name=Moblin 2.0 Core Pre-Alpha1
 failovermethod=priority
 baseurl=http://repo.moblin.org/moblin/releases/test/pre-alpha1/ia32/
 enabled=1
-
+gpgcheck=0
