@@ -51,5 +51,5 @@ AC_CONFIG_FILES([Makefile po/Makefile.in
                  platforms/menlow-lpia-ubuntu-hardy-ppa/Makefile
                  platforms/menlow-lpia-ubuntu-hardy/Makefile
                  platforms/menlow-lpia-ume/Makefile
-                 platforms/netbook-lpia-moblin2/Makefile])
+                 platforms/netbook-lpia-moblin2-prealpha1/Makefile])
 AC_OUTPUT

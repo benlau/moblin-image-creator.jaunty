@@ -1,4 +1,4 @@
-PNAME = netbook-lpia-moblin2
+PNAME = netbook-lpia-moblin2-prealpha1
 
 fsetsdir = ${pkgdatadir}/platforms/${PNAME}/fsets
 fsets_DATA = \
@@ -12,7 +12,7 @@ bin_SCRIPTS = \
 
 yumreposdir = ${pkgdatadir}/platforms/${PNAME}/yum.repos.d
 yumrepos_DATA = \
-	yum.repos.d/Moblin.repo
+	yum.repos.d/moblin.repo
 
 platformdir = ${pkgdatadir}/platforms/${PNAME}
 platform_SCRIPTS = \
