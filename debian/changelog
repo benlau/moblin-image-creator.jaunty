@@ -18,8 +18,9 @@ moblin-image-creator (0.49) gaston; urgency=low
   * Fixed typo changelog date. 
   * Added new platform netbook-lpia-moblin2-alpha1.
   * Fixed platform names.
+  * Stopped the message 'GtkWarning: could not open display'.
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Tue, 10 Mar 2009 00:32:18 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Tue, 10 Mar 2009 01:21:38 +0900
 
 moblin-image-creator (0.48) gaston; urgency=low
 

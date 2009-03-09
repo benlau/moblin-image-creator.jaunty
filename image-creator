@@ -18,7 +18,6 @@
 
 
 import gettext
-import gtk.glade
 import locale
 import os
 import platform
@@ -70,9 +69,8 @@ def main():
     locale.setlocale(locale.LC_ALL)
 
     # More info: http://docs.python.org/lib/i18n.html
-    for module in gtk.glade, gettext:
-        module.bindtextdomain('moblin-image-creator')
-        module.textdomain('moblin-image-creator')
+    gettext.bindtextdomain('moblin-image-creator')
+    gettext.textdomain('moblin-image-creator')
 
     if len(sys.argv) == 1:
         if not pdk_utils.areWeRoot():
@@ -81,6 +79,9 @@ def main():
             sys.exit(1)
         if os.getenv("DISPLAY"):
             try:
+                # More info: http://docs.python.org/lib/i18n.html
+                gtk.glade.bindtextdomain('moblin-image-creator')
+                gtk.glade.textdomain('moblin-image-creator')
                 gui.App().run()
                 return 0
             except:
