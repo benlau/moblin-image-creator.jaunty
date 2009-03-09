@@ -67,6 +67,7 @@ rm -rf %{buildroot}
 - Added new platform netbook-lpia-moblin2-alpha1.
 - Fixed platform names.
 - Stopped the message 'GtkWarning: could not open display'.
+- Importing gtk.glade.
 
 * Mon Mar 02 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Using the genisoimage in project environment.

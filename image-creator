@@ -48,6 +48,7 @@ if mic_cfg.config.has_option('general', 'debug'):
 if len(sys.argv) == 1:
     try:
         import gui
+        import gtk.glade
     except RuntimeError:
         traceback.print_exc()
         # Probably running in a text console
