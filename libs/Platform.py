@@ -206,7 +206,7 @@ class Platform(object):
             os.makedirs(chroot_dir)
         target_os = self.target_os
         var_dir = mic_cfg.config.get('general', 'var_dir')
-        rootstrap_file = os.path.join(var_dir, "rootstraps", "yum", target_os, "rootstrap.tgz")
+        rootstrap_file = os.path.join(var_dir, "rootstraps", "yum", target_os, self.name, "rootstrap.tgz")
         if not os.path.exists(rootstrap_file):
             self.__yumCreateRootstrap(chroot_dir, rootstrap_file, use_rootstrap, callback = callback)
         else:
