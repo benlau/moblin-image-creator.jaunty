@@ -70,6 +70,7 @@ rm -rf %{buildroot}
 - Importing gtk.glade.
 - Fixed directory path on yum rootstraps.
 - Added moblin-devel.repo in netbook-lpia-moblin2-alpha1.
+- Deleted unnecessary command aclocal and m4 directory.
 
 * Mon Mar 02 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Using the genisoimage in project environment.

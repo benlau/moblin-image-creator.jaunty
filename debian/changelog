@@ -22,8 +22,9 @@ moblin-image-creator (0.49) gaston; urgency=low
   * Importing gtk.glade.
   * Fixed directory path on yum rootstraps.
   * Added moblin-devel.repo in netbook-lpia-moblin2-alpha1.
+  * Deleted unnecessary command aclocal and m4 directory.
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Tue, 10 Mar 2009 15:54:29 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Tue, 10 Mar 2009 22:03:56 +0900
 
 moblin-image-creator (0.48) gaston; urgency=low
 
