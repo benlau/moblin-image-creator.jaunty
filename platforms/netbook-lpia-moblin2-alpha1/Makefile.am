@@ -12,7 +12,8 @@ bin_SCRIPTS = \
 
 yumreposdir = ${pkgdatadir}/platforms/${PNAME}/yum.repos.d
 yumrepos_DATA = \
-	yum.repos.d/moblin.repo
+	yum.repos.d/moblin.repo \
+	yum.repos.d/moblin-devel.repo
 
 platformdir = ${pkgdatadir}/platforms/${PNAME}
 platform_SCRIPTS = \

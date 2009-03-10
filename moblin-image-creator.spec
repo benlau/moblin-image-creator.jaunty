@@ -69,6 +69,7 @@ rm -rf %{buildroot}
 - Stopped the message 'GtkWarning: could not open display'.
 - Importing gtk.glade.
 - Fixed directory path on yum rootstraps.
+- Added moblin-devel.repo in netbook-lpia-moblin2-alpha1.
 
 * Mon Mar 02 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Using the genisoimage in project environment.
