@@ -10,7 +10,8 @@ execute_SCRIPTS = \
 
 extradir = ${pkgdatadir}
 extra_DATA = \
-	COPYING
+	COPYING \
+	version
 
 vardir = ${localstatedir}/lib/moblin-image-creator/projects
 var_DATA = 

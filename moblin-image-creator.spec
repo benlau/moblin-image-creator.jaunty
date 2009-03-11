@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Wed Mar 11 2009 Mitsutaka Amano <mamano@miraclelinux.com>
+- Added version file. It's used --version option on CUI and 'Help' -> 'About' on GUI.
+
 * Tue Mar 10 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Renamed to netbook-lpia-moblin2-prealpha1 from netbook-lpia-moblin2. Fixed Moblin 2.0 Pre-Alpha1 yum repository.
 - Fixed typo changelog date.
