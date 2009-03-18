@@ -63,6 +63,7 @@ rm -rf %{buildroot}
 %changelog
 * Wed Mar 18 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added new platform netbook-lpia-moblin2-alpha2.
+- Fixed rpm spec file format.
 
 * Wed Mar 11 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added version file. It's used --version option on CUI and 'Help' -> 'About' on GUI.
@@ -99,18 +100,14 @@ rm -rf %{buildroot}
 - Fixing KVM bug on intrepid
 
 * Fri Dec 05 2008 Mitsutaka Amano <mamano@miraclelinux.com>
-- Supporting Spanish made by Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.co
-m>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
-- Updating Spanish localization made by Juan Jesus Ojeda Croissier <juanje.oje
-da@gmail.com>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
+- Supporting Spanish made by Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
+- Updating Spanish localization made by Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>. Bug URL is http://bugzilla.moblin.org/show_bug.cgi?id=186.
 
 * Wed Dec 03 2008 Mitsutaka Amano <mamano@miraclelinux.com>
-- Fixing a bug about http://bugzilla.moblin.org/show_bug.cgi?id=194. Thanks to
- Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>
+- Fixing a bug about http://bugzilla.moblin.org/show_bug.cgi?id=194. Thanks to Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>
 
 * Mon Dec 01 2008 Mitsutaka Amano <mamano@miraclelinux.com>
-- Fixing a bug about http://bugzilla.moblin.org/show_bug.cgi?id=189. Thanks to
- Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>
+- Fixing a bug about http://bugzilla.moblin.org/show_bug.cgi?id=189. Thanks to Juan Jesus Ojeda Croissier <juanje.ojeda@gmail.com>
 
 * Mon Nov 27 2008 Mitsutaka Amano <mamano@miraclelinux.com>
 - Fixing a bug about http://bugzilla.moblin.org/show_bug.cgi?id=130
