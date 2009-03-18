@@ -1,4 +1,4 @@
-Summary: Mobline Image Creator -- Mobile & Internet Linux Development Kit
+summary: mobline image creator -- mobile & internet linux development kit
 Name: moblin-image-creator
 Version: 0.49
 Release: 1%{?dist}
@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Wed Mar 18 2009 Mitsutaka Amano <mamano@miraclelinux.com>
+- Added new platform netbook-lpia-moblin2-alpha2.
+
 * Wed Mar 11 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added version file. It's used --version option on CUI and 'Help' -> 'About' on GUI.
 

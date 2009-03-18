@@ -24,8 +24,9 @@ moblin-image-creator (0.49) gaston; urgency=low
   * Added moblin-devel.repo in netbook-lpia-moblin2-alpha1.
   * Deleted unnecessary command aclocal and m4 directory.
   * Added version file. It's used --version option on CUI and 'Help' -> 'About' on GUI.
+  * Added new platform netbook-lpia-moblin2-alpha2.
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Wed, 11 Mar 2009 09:27:08 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Wed, 18 Mar 2009 10:37:52 +0900
 
 moblin-image-creator (0.48) gaston; urgency=low
 
