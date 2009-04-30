@@ -1,20 +1,20 @@
 [moblin]
 name=Moblin 2.0 Core Alpha3
 failovermethod=priority
-baseurl=http://repo.moblin.org/moblin/releases/test/alpha3/os
+baseurl=http://repo.moblin.org/moblin/releases/test/alpha3/ia32/os
 enabled=1
 gpgcheck=0
 
 [moblin-debuginfo]
 name=Moblin 2.0 Core Alpha3 - Debug
 failovermethod=priority
-baseurl=http://repo.moblin.org/moblin/releases/test/alpha3/debug
+baseurl=http://repo.moblin.org/moblin/releases/test/alpha3/ia32/debug
 enabled=0
 gpgcheck=0
 
 [moblin-source]
 name=Moblin 2.0 Core Alpha3 - Source
 failovermethod=priority
-baseurl=http://repo.moblin.org/moblin/releases/test/alpha3/source
+baseurl=http://repo.moblin.org/moblin/releases/test/alpha3/ia32/source
 enabled=0
 gpgcheck=0
