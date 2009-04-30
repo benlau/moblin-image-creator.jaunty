@@ -28,8 +28,9 @@ moblin-image-creator (0.49) gaston; urgency=low
   * Fixed rpm spec file format.
   * Added new platform netbook-lpia-moblin2-alpha3.
   * Fixed values in Makefile.
+  * Added default parametors for netbook-lpia-moblin2-alpha3.
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Thu, 30 Apr 2009 09:27:25 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Thu, 30 Apr 2009 09:30:12 +0900
 
 moblin-image-creator (0.48) gaston; urgency=low
 
