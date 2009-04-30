@@ -63,6 +63,7 @@ rm -rf %{buildroot}
 %changelog
 * Thu Apr 30 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added new platform netbook-lpia-moblin2-alpha3.
+- Fixed value in Makefile.
 
 * Wed Mar 18 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added new platform netbook-lpia-moblin2-alpha2.

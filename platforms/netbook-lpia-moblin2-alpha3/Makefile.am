@@ -1,4 +1,4 @@
-PNAME = netbook-lpia-moblin2-alpha2
+PNAME = netbook-lpia-moblin2-alpha3
 
 fsetsdir = ${pkgdatadir}/platforms/${PNAME}/fsets
 fsets_DATA = \

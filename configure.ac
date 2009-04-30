@@ -53,5 +53,6 @@ AC_CONFIG_FILES([Makefile po/Makefile.in
                  platforms/menlow-lpia-ume/Makefile
                  platforms/netbook-lpia-moblin2-alpha1/Makefile
                  platforms/netbook-lpia-moblin2-alpha2/Makefile
+                 platforms/netbook-lpia-moblin2-alpha3/Makefile
                  platforms/netbook-lpia-moblin2-prealpha1/Makefile])
 AC_OUTPUT
