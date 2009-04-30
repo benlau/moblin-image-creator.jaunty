@@ -1,0 +1,21 @@
+[moblin-devel]
+name=Moblin - Developmental packages for the next Moblin release
+failovermethod=priority
+baseurl=http://repo.moblin.org/moblin/development/core/ia32/os
+enabled=0
+gpgcheck=0
+
+[moblin-debuginfo]
+name=Moblin - Debug Packages
+failovermethod=priority
+baseurl=http://repo.moblin.org/moblin/development/base/debug
+enabled=0
+gpgcheck=0
+
+
+[moblin-source]
+name=Moblin - Source
+failovermethod=priority
+baseurl=http://repo.moblin.org/moblin/development/base/source/
+enabled=0
+gpgcheck=0

@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Thu Apr 30 2009 Mitsutaka Amano <mamano@miraclelinux.com>
+- Added new platform netbook-lpia-moblin2-alpha3.
+
 * Wed Mar 18 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added new platform netbook-lpia-moblin2-alpha2.
 - Fixed rpm spec file format.
