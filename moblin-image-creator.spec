@@ -65,6 +65,7 @@ rm -rf %{buildroot}
 - Added new platform netbook-lpia-moblin2-alpha3.
 - Fixed value in Makefile.
 - Added default parametors for netbook-lpia-moblin2-alpha3.
+- Fixed yum repository URL.
 
 * Wed Mar 18 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added new platform netbook-lpia-moblin2-alpha2.
