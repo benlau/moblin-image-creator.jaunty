@@ -260,7 +260,7 @@ usb)
     done
     ;;
 cd)
-    splash_display "Sysstem Will Reboot after 5 seconds"
+    splash_display "System Will Reboot after 5 seconds"
     sleep 5
     ;;
 esac

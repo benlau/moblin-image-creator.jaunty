@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Fri Jun 05 2009 Mitsutaka Amano <mamano@miraclelinux.com>
+- Typo an installation message.
+
 * Thu Apr 30 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Added new platform netbook-lpia-moblin2-alpha3.
 - Fixed value in Makefile.
