@@ -32,8 +32,9 @@ moblin-image-creator (0.49) gaston; urgency=low
   * Fixed yum repository URL.
   * Typo yum repository URL.
   * Typo an installation message.
+  * Enabled distribution.Ubuntu(Ubuntu 9.04 or later).
 
- -- Mitsutaka Amano <mamano@miraclelinux.com>  Fri, 05 Jun 2009 11:53:10 +0900
+ -- Mitsutaka Amano <mamano@miraclelinux.com>  Wed, 24 Jun 2009 10:25:24 +0900
 
 moblin-image-creator (0.48) gaston; urgency=low
 

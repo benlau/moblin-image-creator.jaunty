@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 /var/lib/moblin-image-creator/projects
 
 %changelog
+* Wed Jun 24 2009 Mitsutaka Amano <mamano@miraclelinux.com>
+- Enabled distribution.Ubuntu(Ubuntu 9.04 or later).
+
 * Fri Jun 05 2009 Mitsutaka Amano <mamano@miraclelinux.com>
 - Typo an installation message.
 

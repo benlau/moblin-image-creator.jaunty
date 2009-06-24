@@ -157,7 +157,8 @@ def addDefaults():
         config.set(section, option, value)
     # What distribution are we running on
     dist = platform.dist()[0]
-    if dist == "debian":
+    if dist == "debian" or dist == "Ubuntu":
+        dist = "debian"
         pkg_manager = "apt"
     elif dist == "fedora" or dist == "redhat":
         dist = "fedora"
