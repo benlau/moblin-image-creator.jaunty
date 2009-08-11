@@ -12,6 +12,7 @@ SUBDIRS = \
 	menlow-lpia-ubuntu-hardy-ppa \
 	menlow-lpia-ubuntu-hardy-ppa-snapshot \
 	menlow-lpia-ume \
+	netbook-lpia-ubuntu-jaunty \
 	netbook-lpia-moblin2-prealpha1 \
 	netbook-lpia-moblin2-alpha1 \
 	netbook-lpia-moblin2-alpha2 \
@@ -20,7 +21,8 @@ SUBDIRS = \
 debootstrap_scriptdir = ${pkgdatadir}/debootstrap-scripts
 debootstrap_script_DATA = \
 	common-apt/debootstrap-scripts/gutsy \
-	common-apt/debootstrap-scripts/hardy
+	common-apt/debootstrap-scripts/hardy \
+	common-apt/debootstrap-scripts/jaunty
 
 platforms_cfgdir = ${pkgdatadir}/platforms
 platforms_cfg_DATA = \
