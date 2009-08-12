@@ -286,45 +286,15 @@ class InstallImage(object):
         self.rootfs_path = os.path.join(self.target.image_path, self.rootfs)
         if os.path.isfile(self.rootfs_path):
             os.remove(self.rootfs_path)
-      
+        
+        fs_path      = self.target.fs_path[len(self.project.path):]
+        image_path   = self.target.image_path[len(self.project.path):]
+        image_path   = os.path.join(image_path,'rootfs.img')
+        cmd          = "mksquashfs %s %s -no-progress -ef %s" % (fs_path, image_path, self.exclude_file)
         self.write_manifest(self.path)
         self.target.umount()
-
-        fs_path      = self.target.fs_path[len(self.project.path):]
-        cmd = "du -ks %s" % fs_path
-        print _("Caclulating FS size: %s") % cmd
-        cmdOutput = []
-        self.project.chroot(cmd, cmdOutput)
-        out_string = chr(0) * 1024
-        out_file = open(self.rootfs_path, 'w')
-        # Write the string out to the file to create file of size * kibyte in length
-        size = int(string.atoi(cmdOutput[0].split()[0]) * 1.1) + 40960
-        print "Rootfs size: %s" % size
-        for count in range(0, size):
-            if self.progress_callback and count % 1024 == 0:
-                self.progress_callback(None)
-            out_file.write(out_string)
-        out_file.close()       
-
-        image_path   = self.target.image_path[len(self.project.path):] 
-        image_path   = os.path.join(image_path,'rootfs.img')        
-        cmd = 'mkfs.ext3 -F %s' % image_path
-        self.project.chroot(cmd)        
-
-        temp_dir   = os.path.join(self.target.image_path,'temp')        
-        if not os.path.exists(temp_dir):
-            os.makedirs(temp_dir)
-
-        print _("Mounting rootfs.img ...")
-        cmd = "mount -o loop %s %s" % (self.rootfs_path, temp_dir)
-        pdk_utils.execCommand(cmd)        
-        print _("Copying files...")
-        cmd = "cp -a %s/. %s" % (self.target.fs_path, temp_dir)
-        pdk_utils.execCommand(cmd)        
-        print _("Unmounting...")
-        cmd = "umount %s" % (temp_dir)
-        pdk_utils.execCommand(cmd)        
-
+        print _("Executing the mksquashfs program: %s") % cmd
+        self.project.chroot(cmd)
         self.target.mount()
             
     def delete_rootfs(self):
